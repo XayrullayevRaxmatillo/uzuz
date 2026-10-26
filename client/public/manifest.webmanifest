@@ -1,0 +1,16 @@
+{
+  "name": "UZUZ — jonli quiz o‘yinlari",
+  "short_name": "UZUZ",
+  "description": "Bilim — kuch. Jamoa — g‘alaba. Bepul, ro‘yxatdan o‘tishsiz quiz o‘yinlari.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0A0F2C",
+  "theme_color": "#0A0F2C",
+  "lang": "uz",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

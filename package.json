@@ -1,0 +1,26 @@
+{
+  "name": "uzuz",
+  "private": true,
+  "version": "1.0.0",
+  "description": "UZUZ — bepul, ko‘p tilli, real-time multiplayer quiz platformasi",
+  "workspaces": [
+    "shared",
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n server,client -c magenta,cyan \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w client",
+    "start": "npm run start -w server",
+    "seed": "npm run seed -w server",
+    "admin:create": "npm run admin:create -w server",
+    "test": "npm run test -w shared && npm run test -w server",
+    "typecheck": "npm run typecheck -w shared && npm run typecheck -w server && npm run typecheck -w client"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

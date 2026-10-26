@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Theme tokens (RGB triplets so Tailwind can apply alpha) ---------- */
+:root {
+  --bg: 245 247 255;
+  --bg-2: 234 237 252;
+  --surface: 255 255 255;
+  --surface-2: 241 243 252;
+  --ink: 16 21 58;
+  --muted: 84 92 135;
+  --line: 16 21 58;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: 10 15 44;
+  --bg-2: 18 26 58;
+  --surface: 24 33 72;
+  --surface-2: 31 42 88;
+  --ink: 238 240 255;
+  --muted: 160 168 210;
+  --line: 255 255 255;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    min-height: 100dvh;
+  }
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: Unbounded, system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: rgba(124, 58, 237, 0.35);
+  }
+  :focus-visible {
+    outline: 3px solid #22d3ee;
+    outline-offset: 2px;
+    border-radius: 10px;
+  }
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply border border-line/10 bg-surface/80 backdrop-blur-xl;
+  }
+  .panel {
+    @apply rounded-panel border border-line/10 bg-surface/70 backdrop-blur-xl;
+  }
+  .field {
+    @apply w-full rounded-btn border border-line/15 bg-surface-2/70 px-4 py-3 text-ink placeholder:text-muted/70 transition focus:border-cyan focus:outline-none focus:ring-4 focus:ring-cyan/20;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-semibold text-muted;
+  }
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+  .brand-gradient {
+    background-image: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+  }
+  .text-gradient {
+    background-image: linear-gradient(120deg, #c4b5fd 0%, #67e8f9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  :root:not(.dark) .text-gradient {
+    background-image: linear-gradient(120deg, #6d28d9 0%, #0891b2 100%);
+  }
+}
+
+/* ---------- Ambient background ---------- */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.aurora::before,
+.aurora::after {
+  content: '';
+  position: absolute;
+  width: 70vmax;
+  height: 70vmax;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.55;
+  animation: drift 22s ease-in-out infinite;
+}
+.aurora::before {
+  top: -30vmax;
+  left: -20vmax;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.55), transparent 65%);
+}
+.aurora::after {
+  bottom: -35vmax;
+  right: -25vmax;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.28), transparent 65%);
+  animation-delay: -9s;
+}
+:root:not(.dark) .aurora::before {
+  opacity: 0.25;
+}
+:root:not(.dark) .aurora::after {
+  opacity: 0.25;
+}
+.grid-dots {
+  background-image: radial-gradient(rgb(var(--line) / 0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(4%, -3%) scale(1.08);
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
+/* Hide scrollbars on horizontal chip rows while keeping them scrollable */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
